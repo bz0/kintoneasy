@@ -162,7 +162,7 @@ $res    = $client->method('put')->records($content);
 ```
 ## レコードの削除
 
-### 1件更新
+### 1件削除
 
 ```php
 $content = array(
@@ -174,7 +174,7 @@ $client = new kintoneasy\client();
 $res    = $client->method('delete')->records($content);
 ```
 
-### 1件削除
+### 複数件削除
 
 ```php
 $content = array(
