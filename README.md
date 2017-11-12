@@ -32,7 +32,6 @@ https://developer.cybozu.io/hc/ja/articles/202166160
 ```php
 //レコードを１件取得
 $content = array(
-    "app" => 1,
     "id"  => 1
 );
 
