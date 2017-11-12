@@ -13,7 +13,7 @@ class getTest extends PHPUnit\Framework\TestCase{
      /*
       * 異常：存在しないメソッド名を入力
       */
-     public function testGet_1件取得(){
+     public function testGet_異常_存在しないメソッド名(){
         try{
             $content = array(
                 "app" => 1,
