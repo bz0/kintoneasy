@@ -48,7 +48,6 @@ $res    = $client->method('get')->record($content);
 
 ```php
 $content = array(
-    "app" => 1,
     "id"  => 1003
 );
 
@@ -124,7 +123,6 @@ $res    = $client->method('post')->records($content);
 
 ```php
 $content = array(
-    "app" => 1,
     "id"  => 2000,
     "record" => array(
         "name" => array(
@@ -141,7 +139,6 @@ $res    = $client->method('put')->record($content);
 
 ```php
 $content = array(
-    "app" => 1,
     "records" => array(
         array(
             "id"  => 2000,
@@ -166,7 +163,6 @@ $res    = $client->method('put')->records($content);
 
 ```php
 $content = array(
-    "app" => 1,
     "ids" => array_values(array("1009"))
 );
 
@@ -178,7 +174,6 @@ $res    = $client->method('delete')->records($content);
 
 ```php
 $content = array(
-    "app" => 1,
     "ids" => array_values(array("1007","1008"))
 );
 
