@@ -21,6 +21,7 @@ class client{
                 $req = new method\delete(self::$config);
                 break;
             default:
+                throw new \Exception("メソッド名の入力が間違っています");
                 break;
         }
         

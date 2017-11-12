@@ -9,6 +9,27 @@ class getTest extends PHPUnit\Framework\TestCase{
             "app"       => 1
         );
      }
+
+     /*
+      * 異常：存在しないメソッド名を入力
+      */
+     public function testGet_1件取得(){
+        try{
+            $content = array(
+                "app" => 1,
+                "id"  => 1003
+            );
+
+            $client = new kintoneasy\client();
+            $res    = $client->method('aaa')->record($content);
+        }catch(\Exception $e){
+            $msg = $e->getMessage();
+            
+            echo "msg:" . $msg;
+        }
+        
+        $this->assertEquals("メソッド名の入力が間違っています", $msg);
+     }
      
      /*
       * 正常：1件取得
