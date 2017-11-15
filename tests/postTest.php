@@ -6,7 +6,7 @@ class postTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
         $json = bz0\kintoneasy\config::read("post");
         
-        kintoneasy\client::$config = array(
+        bz0\kintoneasy\client::$config = array(
             "subdomain" => $json['subdomain'],
             "token"     => $json['token'],
             "app"       => $json['app']
@@ -28,10 +28,8 @@ class postTest extends PHPUnit\Framework\TestCase{
             )
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('post')->record($content);
-        
-        print_r($res);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('post')->record($content);
         
         $this->assertEquals(array("id", "revision"), array_keys($res));
      }
@@ -58,10 +56,8 @@ class postTest extends PHPUnit\Framework\TestCase{
             )
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('post')->records($content);
-        
-        print_r($res);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('post')->records($content);
         
         $this->assertEquals(array("ids", "revisions"), array_keys($res));
      }

@@ -5,7 +5,7 @@ require_once(__DIR__ . "/config.php");
 class putTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
         $json = bz0\kintoneasy\config::read("put");
-        kintoneasy\client::$config = array(
+        bz0\kintoneasy\client::$config = array(
             "subdomain" => $json['subdomain'],
             "token"     => $json['token'],
             "app"       => $json['app']
@@ -25,10 +25,8 @@ class putTest extends PHPUnit\Framework\TestCase{
             )
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('put')->record($content);
-        
-        print_r($res);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('put')->record($content);
         
         $this->assertEquals(array("revision"), array_keys($res));
      }
@@ -53,8 +51,8 @@ class putTest extends PHPUnit\Framework\TestCase{
             )
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('put')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('put')->records($content);
         
         $this->assertEquals(2, count($res['records']));
      }

@@ -5,7 +5,7 @@ require_once(__DIR__ . "/config.php");
 class deleteTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
         $json = bz0\kintoneasy\config::read("delete");
-        kintoneasy\client::$config = array(
+        bz0\kintoneasy\client::$config = array(
             "subdomain" => $json['subdomain'],
             "token"     => $json['token'],
             "app"       => $json['app']
@@ -17,13 +17,11 @@ class deleteTest extends PHPUnit\Framework\TestCase{
       */
      public function testDelete_1件削除(){
         $content = array(
-            "ids" => array_values(array("1009"))
+            "ids" => array_values(array("1017"))
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('delete')->records($content);
-        
-        print_r($res);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('delete')->records($content);
         
         $this->assertEquals(array(), $res);
      }
@@ -33,11 +31,11 @@ class deleteTest extends PHPUnit\Framework\TestCase{
       */
      public function testDelete_複数件削除(){
         $content = array(
-            "ids" => array_values(array("1007","1008"))
+            "ids" => array_values(array("1015","1016"))
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('delete')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('delete')->records($content);
         
         $this->assertEquals(array(), $res);
      }
@@ -51,8 +49,8 @@ class deleteTest extends PHPUnit\Framework\TestCase{
             "ids" => array_values(array("1","2"))
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('delete')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('delete')->records($content);
         
         $this->assertEquals("CB_IL02", $res['code']);
      }

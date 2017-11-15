@@ -10,7 +10,7 @@ class put implements methodInterface{
     
     public function record($content){
         $file = "record.json";
-        $req  = new bz0\kintoneasy\request($this->config, $file);
+        $req  = new \bz0\kintoneasy\request($this->config, $file);
         $res  = $req->send($content);
         
         return $res;
@@ -18,7 +18,7 @@ class put implements methodInterface{
     
     public function records($content){
         $file = "records.json";
-        $req  = new bz0\kintoneasy\request($this->config, $file);
+        $req  = new \bz0\kintoneasy\request($this->config, $file);
         $res  = $req->send($content);
         
         return $res;
