@@ -1,28 +1,27 @@
 <?php
-namespace kintoneasy;
+namespace bz0\kintoneasy;
 
 class client{
     public static $config;
     
-    public function method($method){
+    public function rec($method){
         self::$config['method'] = strtoupper($method);
         
         switch(self::$config['method']){
             case 'GET':
-                $req = new method\get(self::$config);
+                $req = new record\get(self::$config);
                 break;
             case 'POST':
-                $req = new method\post(self::$config);
+                $req = new record\post(self::$config);
                 break;
             case 'PUT':
-                $req = new method\put(self::$config);
+                $req = new record\put(self::$config);
                 break;
             case 'DELETE':
-                $req = new method\delete(self::$config);
+                $req = new record\delete(self::$config);
                 break;
             default:
                 throw new \Exception("メソッド名の入力が間違っています");
-                break;
         }
         
         return $req;

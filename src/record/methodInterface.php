@@ -1,5 +1,5 @@
 <?php
-namespace kintoneasy\method;
+namespace bz0\kintoneasy\record;
 
 interface methodInterface {
     public function record($content);

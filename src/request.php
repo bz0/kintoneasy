@@ -1,5 +1,5 @@
 <?php
-namespace kintoneasy;
+namespace bz0\kintoneasy;
 
 class request{
     const VERSION = 1;

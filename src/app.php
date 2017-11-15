@@ -1,5 +1,5 @@
 <?php
-namespace kintoneasy;
+namespace bz0\kintoneasy;
 
 class app {
     const VERSION = 1;
@@ -7,6 +7,7 @@ class app {
     public static $config;
     
     public function __construct(){
+        self::$config['method'] = "POST";
         $this->url    = "https://" . self::$config['subdomain'] . ".cybozu.com/k/v" . self::VERSION . "/";
     }
     

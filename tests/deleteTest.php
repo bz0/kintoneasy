@@ -1,12 +1,14 @@
 <?php
 require_once(__DIR__ . "/../vendor/autoload.php");
+require_once(__DIR__ . "/config.php");
 
 class deleteTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
+        $json = bz0\kintoneasy\config::read("delete");
         kintoneasy\client::$config = array(
-            "subdomain" => "",
-            "token"     => "",
-            "app"       => 1
+            "subdomain" => $json['subdomain'],
+            "token"     => $json['token'],
+            "app"       => $json['app']
         );
      }
      
@@ -15,7 +17,6 @@ class deleteTest extends PHPUnit\Framework\TestCase{
       */
      public function testDelete_1件削除(){
         $content = array(
-            "app" => 1,
             "ids" => array_values(array("1009"))
         );
 
@@ -32,7 +33,6 @@ class deleteTest extends PHPUnit\Framework\TestCase{
       */
      public function testDelete_複数件削除(){
         $content = array(
-            "app" => 1,
             "ids" => array_values(array("1007","1008"))
         );
 
@@ -48,7 +48,6 @@ class deleteTest extends PHPUnit\Framework\TestCase{
       */
      public function testDelete_1件削除_該当データなし(){
         $content = array(
-            "app" => 1,
             "ids" => array_values(array("1","2"))
         );
 

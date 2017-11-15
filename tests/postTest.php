@@ -1,12 +1,15 @@
 <?php
 require_once(__DIR__ . "/../vendor/autoload.php");
+require_once(__DIR__ . "/config.php");
 
 class postTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
+        $json = bz0\kintoneasy\config::read("post");
+        
         kintoneasy\client::$config = array(
-            "subdomain" => "",
-            "token"     => "",
-            "app"       => 29
+            "subdomain" => $json['subdomain'],
+            "token"     => $json['token'],
+            "app"       => $json['app']
         );
      }
      

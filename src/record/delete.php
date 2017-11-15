@@ -1,5 +1,5 @@
 <?php
-namespace kintoneasy\method;
+namespace bz0\kintoneasy\record;
 
 class delete implements methodInterface{
     private $config;
@@ -10,7 +10,7 @@ class delete implements methodInterface{
     
     public function record($content){
         $file = "record.json";
-        $req  = new \kintoneasy\request($this->config, $file);
+        $req  = new bz0\kintoneasy\request($this->config, $file);
         $res  = $req->send($content);
         
         return $res;
@@ -18,7 +18,7 @@ class delete implements methodInterface{
     
     public function records($content){
         $file = "records.json";
-        $req  = new \kintoneasy\request($this->config, $file);
+        $req  = new bz0\kintoneasy\request($this->config, $file);
         $res  = $req->send($content);
         
         return $res;

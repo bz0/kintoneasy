@@ -1,15 +1,17 @@
 <?php
 require_once(__DIR__ . "/../vendor/autoload.php");
+require_once(__DIR__ . "/config.php");
 
 class getTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
-        kintoneasy\client::$config = array(
-            "subdomain" => "",
-            "token"     => "",
-            "app"       => 1
+        $json = bz0\kintoneasy\config::read("get");
+        bz0\kintoneasy\client::$config = array(
+            "subdomain" => $json['subdomain'],
+            "token"     => $json['token'],
+            "app"       => $json['app']
         );
      }
-
+     
      /*
       * 異常：存在しないメソッド名を入力
       */
@@ -20,12 +22,10 @@ class getTest extends PHPUnit\Framework\TestCase{
                 "id"  => 1003
             );
 
-            $client = new kintoneasy\client();
-            $res    = $client->method('aaa')->record($content);
+            $client = new bz0\kintoneasy\client();
+            $res    = $client->rec('aaa')->record($content);
         }catch(\Exception $e){
             $msg = $e->getMessage();
-            
-            echo "msg:" . $msg;
         }
         
         $this->assertEquals("メソッド名の入力が間違っています", $msg);
@@ -36,14 +36,13 @@ class getTest extends PHPUnit\Framework\TestCase{
       */
      public function testGet_1件取得(){
         $content = array(
-            "app" => 1,
-            "id"  => 1003
+            "id"  => 1999
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('get')->record($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->record($content);
         
-        $this->assertEquals("Daron Harvey", $res['record']['name']['value']);
+        $this->assertEquals("1999", $res['record']['$id']['value']);
      }
      
      /*
@@ -51,12 +50,11 @@ class getTest extends PHPUnit\Framework\TestCase{
       */
      public function testGet_1件取得_該当データなし(){
         $content = array(
-            "app" => 1,
             "id"  => 10000
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('get')->record($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->record($content);
         
         $this->assertEquals("GAIA_RE01", $res['code']);
      }
@@ -70,8 +68,8 @@ class getTest extends PHPUnit\Framework\TestCase{
             "query" => ""
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('get')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->records($content);
         
         $this->assertEquals(100, count($res['records']));
      }
@@ -86,8 +84,8 @@ class getTest extends PHPUnit\Framework\TestCase{
             "totalCount" => true
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('get')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->records($content);
         
         $this->assertEquals(50, count($res['records']));
      }
@@ -103,8 +101,8 @@ class getTest extends PHPUnit\Framework\TestCase{
             "totalCount" => true
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('get')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->records($content);
         
         foreach($res['records'] as $i => $val){
             $this->assertEquals(array("name"), array_keys($val));
@@ -121,8 +119,8 @@ class getTest extends PHPUnit\Framework\TestCase{
             "totalCount" => true
         );
 
-        $client = new kintoneasy\client();
-        $res    = $client->method('get')->records($content);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->records($content);
         
         $this->assertEquals("GAIA_IQ03", $res['code']);
      }

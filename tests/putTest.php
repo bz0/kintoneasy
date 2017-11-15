@@ -1,12 +1,14 @@
 <?php
 require_once(__DIR__ . "/../vendor/autoload.php");
+require_once(__DIR__ . "/config.php");
 
 class putTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
+        $json = bz0\kintoneasy\config::read("put");
         kintoneasy\client::$config = array(
-            "subdomain" => "",
-            "token"     => "",
-            "app"       => 1
+            "subdomain" => $json['subdomain'],
+            "token"     => $json['token'],
+            "app"       => $json['app']
         );
      }
      
@@ -15,7 +17,6 @@ class putTest extends PHPUnit\Framework\TestCase{
       */
      public function testPut_1件更新(){
         $content = array(
-            "app" => 1,
             "id"  => 2000,
             "record" => array(
                 "name" => array(
@@ -37,7 +38,6 @@ class putTest extends PHPUnit\Framework\TestCase{
       */
      public function testPut_複数件更新(){
         $content = array(
-            "app" => 1,
             "records" => array(
                 array(
                     "id"  => 2000,

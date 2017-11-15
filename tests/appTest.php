@@ -1,18 +1,20 @@
 <?php
 require_once(__DIR__ . "/../vendor/autoload.php");
+require_once(__DIR__ . "/config.php");
 
 class appTest extends PHPUnit\Framework\TestCase{
      private $appId;
      private $app;
      
      protected function setUp() {
-        kintoneasy\app::$config = array(
-            "subdomain" => "",
-            "method"    => "POST",
-            "auth"      => ""
+        $json = bz0\kintoneasy\config::read("app");
+        
+        bz0\kintoneasy\app::$config = array(
+            "subdomain" => $json['subdomain'],
+            "auth"      => $json['auth']
         );
         
-        $this->app = new kintoneasy\app();
+        $this->app = new bz0\kintoneasy\app();
      }
      
      /*
@@ -22,6 +24,8 @@ class appTest extends PHPUnit\Framework\TestCase{
         $content = array("name" => "テストアプリ");
         $res = $this->app->create($content);
         $appId = $res['app'];
+        
+        print_r($res);
          
         $this->assertEquals(array("app", "revision"), array_keys($res));
          
@@ -42,6 +46,9 @@ class appTest extends PHPUnit\Framework\TestCase{
          );
          
         $res = $this->app->fields($content);
+        
+        print_r($res);
+        
         $this->assertEquals(array("revision"), array_keys($res));
         
         $content = array(
@@ -54,6 +61,7 @@ class appTest extends PHPUnit\Framework\TestCase{
         );
         
         $res = $this->app->deploy($content);
-        $this->assertEquals("", $res);
+        
+        
      }
 }
