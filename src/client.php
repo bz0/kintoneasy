@@ -26,4 +26,24 @@ class client{
         
         return $req;
     }
+    
+    public function app($cmd){
+        self::$config['method'] = "POST";
+        
+        switch(strtoupper($cmd)){
+            case 'CREATE':
+                $req = new app\create(self::$config);
+                break;
+            case 'FIELDS':
+                $req = new app\fields(self::$config);
+                break;
+            case 'DEPLOY':
+                $req = new app\deploy(self::$config);
+                break;
+            default:
+                throw new \Exception("コマンド名の入力が間違っています");
+        }
+        
+        return $req;
+    }
 }

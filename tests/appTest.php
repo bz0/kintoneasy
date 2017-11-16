@@ -9,12 +9,12 @@ class appTest extends PHPUnit\Framework\TestCase{
      protected function setUp() {
         $json = bz0\kintoneasy\config::read("app");
         
-        bz0\kintoneasy\app::$config = array(
+        bz0\kintoneasy\client::$config = array(
             "subdomain" => $json['subdomain'],
             "auth"      => $json['auth']
         );
         
-        $this->app = new bz0\kintoneasy\app();
+        $this->app = new bz0\kintoneasy\client();
      }
      
      /*
@@ -22,10 +22,11 @@ class appTest extends PHPUnit\Framework\TestCase{
       */
      public function testCreate(){
         $content = array("name" => "テストアプリ");
-        $res = $this->app->create($content);
-        $appId = $res['app'];
         
-        print_r($res);
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->app('create')->exec($content);
+
+        $appId = $res['app'];
          
         $this->assertEquals(array("app", "revision"), array_keys($res));
          
@@ -45,10 +46,7 @@ class appTest extends PHPUnit\Framework\TestCase{
              )
          );
          
-        $res = $this->app->fields($content);
-        
-        print_r($res);
-        
+        $res = $res    = $client->app('fields')->exec($content);
         $this->assertEquals(array("revision"), array_keys($res));
         
         $content = array(
@@ -60,7 +58,7 @@ class appTest extends PHPUnit\Framework\TestCase{
             )
         );
         
-        $res = $this->app->deploy($content);
+        $res = $client->app('deploy')->exec($content);
         
         
      }

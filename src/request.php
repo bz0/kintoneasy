@@ -12,20 +12,34 @@ class request{
     }
     
     private function header(){
-        $header = array(
-            "Host: {$this->config['subdomain']}.cybozu.com:443",
-            "X-Cybozu-API-Token: {$this->config['token']}",
-            "Content-Type: application/json",
-            "X-HTTP-Method-Override: {$this->config['method']}"
-        );
+        $header   = array();
+        $header[] = "Content-Type: application/json";
+        
+        if (isset($this->config['subdomain'])){
+            $header[] = "Host: {$this->config['subdomain']}.cybozu.com:443";
+        }
+        
+        if (isset($this->config['token'])){
+            $header[] = "X-Cybozu-API-Token: {$this->config['token']}";
+        }
+        
+        if (isset($this->config['auth'])){
+            $header[] = "X-Cybozu-Authorization: " . $this->config['auth'];
+            $header[] = "Authorization: Basic " . $this->config['auth'];
+        }
+        
+        if (isset($this->config['method'])){
+            $header[] = "X-HTTP-Method-Override: {$this->config['method']}";
+        }
         
         return $header;
     }
     
     private function body($content){
-        $body = array(
-            "app" => $this->config['app']
-        );
+        $body = array();
+        if (isset($this->config['app'])){
+            $body["app"] = $this->config['app'];
+        }
         
         if (!empty($content)){
             $body = array_merge($body, $content);

@@ -12,12 +12,25 @@ class app {
     }
     
     private function header(){
-        $header = array(
-            "Host: " . self::$config['subdomain'] . ".cybozu.com:443",
-            "X-Cybozu-Authorization: " . self::$config['auth'],
-            "Authorization: Basic " . self::$config['auth'],
-            "Content-Type: application/json"
-        );
+        $header   = array();
+        $header[] = "Content-Type: application/json";
+        
+        if (isset($this->config['subdomain'])){
+            $header[] = "Host: {$this->config['subdomain']}.cybozu.com:443";
+        }
+        
+        if (isset($this->config['token'])){
+            $header[] = "X-Cybozu-API-Token: {$this->config['token']}";
+        }
+        
+        if (isset($this->config['auth'])){
+            $header[] = "X-Cybozu-Authorization: " . self::$config['auth'];
+            $header[] = "Authorization: Basic " . self::$config['auth'];
+        }
+        
+        if (isset($this->config['method'])){
+            $header[] = "X-HTTP-Method-Override: {$this->config['method']}";
+        }
         
         return $header;
     }
