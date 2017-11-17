@@ -124,4 +124,28 @@ class getTest extends PHPUnit\Framework\TestCase{
         
         $this->assertEquals("GAIA_IQ03", $res['code']);
      }
+     
+     public function testFetchAll_複数回リクエスト(){
+        $content = array(
+            "query" => "no >= 760 order by no asc",
+            "totalCount" => true
+        );
+        
+         $client = new bz0\kintoneasy\client();
+         $res    = $client->rec('get')->fetchAll($content);
+         
+         $this->assertEquals($res['totalCount'], count($res['records']));
+     }
+     
+     public function testFetchAll_1回リクエスト(){
+        $content = array(
+            "query" => "no >= 970 order by no asc",
+            "totalCount" => true
+        );
+        
+        $client = new bz0\kintoneasy\client();
+        $res    = $client->rec('get')->fetchAll($content);
+         
+        $this->assertEquals($res['totalCount'], count($res['records']));
+     }
 }
