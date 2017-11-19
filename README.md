@@ -7,8 +7,5 @@ PHP5.3以上
 
 # 使い方
 
-## レコード操作 
-https://github.com/bz0/kintoneasy/wiki/%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C
-
-## アプリ生成・設定・反映
-https://github.com/bz0/kintoneasy/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E7%94%9F%E6%88%90%E3%81%A8%E8%A8%AD%E5%AE%9A
+下記を参照下さい。
+[wiki 目次](https://github.com/bz0/kintoneasy/wiki/kintoneasy%E3%80%80%E7%9B%AE%E6%AC%A1)
