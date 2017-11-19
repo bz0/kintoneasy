@@ -46,4 +46,18 @@ class client{
         
         return $req;
     }
+    
+    public function file($cmd){
+        self::$config['method'] = "POST";
+        
+        switch(strtoupper($cmd)){
+            case 'IMPORT':
+                $req = new file\import(self::$config);
+                break;
+            default:
+                throw new \Exception("コマンド名の入力が間違っています");
+        }
+        
+        return $req;
+    }
 }
