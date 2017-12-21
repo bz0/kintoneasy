@@ -40,6 +40,10 @@ class client{
             case 'DEPLOY':
                 $req = new app\deploy(self::$config);
                 break;
+            case 'INFO':
+                self::$config['method'] = "GET";
+                $req = new app\info(self::$config);
+                break;
             default:
                 throw new \Exception("コマンド名の入力が間違っています");
         }
@@ -53,6 +57,18 @@ class client{
         switch(strtoupper($cmd)){
             case 'IMPORT':
                 $req = new file\import(self::$config);
+                break;
+            default:
+                throw new \Exception("コマンド名の入力が間違っています");
+        }
+        
+        return $req;
+    }
+    
+    public function cli($cmd){
+        switch(strtoupper($cmd)){
+            case 'DOWNLOAD':
+                $req = new cli\download(self::$config);
                 break;
             default:
                 throw new \Exception("コマンド名の入力が間違っています");
